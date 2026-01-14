@@ -19,7 +19,7 @@ services:
       - bi_network
 
   pentaho:
-    image: pentaho-server-docker-pentaho
+    image: oscarucuenca/datawarehouserepo:v1
     container_name: pentaho_server
     restart: unless-stopped
     depends_on:
