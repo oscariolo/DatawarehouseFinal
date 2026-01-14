@@ -1,0 +1,57 @@
+
+services:
+  postgres:
+    image: postgres:17 # Using a specific version is safer than 'latest'
+    container_name: pentaho_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: pentaho
+      POSTGRES_PASSWORD: password123
+      POSTGRES_DB: pentaho_db
+      # THE FIX: Explicitly tell Postgres where to put data within the mount
+      PGDATA: /var/lib/postgresql/data/pgdata
+    ports:
+      - "5432:5432"
+    volumes:
+      # THE FIX: Mount the parent directory, not the data directory directly
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - bi_network
+
+  pentaho:
+    image: pentaho-server-docker-pentaho
+    container_name: pentaho_server
+    restart: unless-stopped
+    depends_on:
+      - postgres
+    ports:
+      - "8080:8080"
+    volumes:
+      - pentaho_data:/opt/pentaho/server/pentaho-server/data
+    networks:
+      - bi_network
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: pentaho_grafana
+    restart: unless-stopped
+    depends_on:
+      - postgres
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_INSTALL_PLUGINS=yesoreyeram-infinity-datasource
+    volumes:
+      - grafana_data:/var/lib/grafana
+    networks:
+      - bi_network
+
+volumes:
+  postgres_data:
+  pentaho_data:
+  grafana_data:
+
+networks:
+  bi_network:
+    driver: bridge

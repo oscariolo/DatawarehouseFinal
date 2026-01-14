@@ -1,0 +1,92 @@
+<Schema name="Migracion_DW">
+  <Dimension type="TimeDimension" visible="true" highCardinality="false" name="Fecha">
+    <Hierarchy name="New Hierarchy 0" visible="true" hasAll="true" primaryKey="id_fecha">
+      <Table name="dim_fecha" schema="public">
+      </Table>
+      <Level name="Anio" visible="true" column="anio_movi" type="Numeric" uniqueMembers="false" levelType="TimeYears" hideMemberIf="Never">
+      </Level>
+      <Level name="Mes" visible="true" column="mes_movi" ordinalColumn="mes_movi" type="Numeric" uniqueMembers="false" levelType="TimeMonths" hideMemberIf="Never">
+      </Level>
+      <Level name="Dia" visible="true" column="dia_movi" type="Numeric" uniqueMembers="false" levelType="TimeDays" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="Frontera">
+    <Hierarchy name="New Hierarchy 0" visible="true" hasAll="true" primaryKey="id_frontera">
+      <Table name="dim_frontera" schema="public">
+      </Table>
+      <Level name="Provincia" visible="true" column="pro_jefm" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="Canton" visible="true" column="can_jefm" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="Jefatura" visible="true" column="jef_migr" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="Transporte">
+    <Hierarchy name="New Hierarchy 0" visible="true" hasAll="true" primaryKey="id_transporte">
+      <Table name="dim_transporte" schema="public">
+      </Table>
+      <Level name="Via" visible="true" column="via_tran" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="Persona">
+    <Hierarchy name="Nacionalidad" visible="true" hasAll="true" primaryKey="id_persona">
+      <Table name="dim_persona" schema="public">
+      </Table>
+      <Level name="Nacionalidad" visible="true" column="nac_migr" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="Sexo" visible="true" hasAll="true" primaryKey="id_persona">
+      <Table name="dim_persona" schema="public">
+      </Table>
+      <Level name="Sexo" visible="true" column="sex_migr" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="Ocupacion">
+    <Hierarchy name="New Hierarchy 0" visible="true" hasAll="true">
+      <Table name="dim_ocupacion" schema="public">
+      </Table>
+      <Level name="Ocupacion" visible="true" column="ocu_migr" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Cube name="Emigrantes" visible="true" cache="true" enabled="true">
+    <Table name="fact_emigrante" schema="public">
+    </Table>
+    <DimensionUsage source="Fecha" name="Fecha" visible="true" foreignKey="id_fecha" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Frontera" name="Frontera" visible="true" foreignKey="id_frontera" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Transporte" name="Transporte" visible="true" foreignKey="id_transporte" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Persona" name="Persona" visible="true" foreignKey="id_persona" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Ocupacion" name="Ocupacion" visible="true" foreignKey="id_ocupacion" highCardinality="false">
+    </DimensionUsage>
+    <Measure name="Cantidad Movimientos" column="id_persona" formatString="#,###" aggregator="count" visible="true">
+    </Measure>
+    <Measure name="Promedio de Edades" column="edad" formatString="#.00" aggregator="avg" visible="true">
+    </Measure>
+  </Cube>
+  <Cube name="Inmigrantes" visible="true" cache="true" enabled="true">
+    <Table name="fact_inmigrante" schema="public">
+    </Table>
+    <DimensionUsage source="Fecha" name="Fecha" visible="true" foreignKey="id_fecha" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Frontera" name="Frontera" visible="true" foreignKey="id_frontera" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Transporte" name="Transporte" visible="true" foreignKey="id_transporte" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Persona" name="Persona" visible="true" foreignKey="id_persona" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Ocupacion" name="Ocupacion" visible="true" foreignKey="id_ocupacion" highCardinality="false">
+    </DimensionUsage>
+    <Measure name="Cantidad Movimientos" column="id_persona" formatString="#,###" aggregator="count" visible="true">
+    </Measure>
+    <Measure name="Promedio de Edades" column="edad" formatString="#.00" aggregator="avg" visible="true">
+    </Measure>
+  </Cube>
+</Schema>
