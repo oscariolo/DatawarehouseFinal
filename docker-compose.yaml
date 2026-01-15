@@ -15,6 +15,7 @@ services:
     volumes:
       # THE FIX: Mount the parent directory, not the data directory directly
       - postgres_data:/var/lib/postgresql/data
+      - ./postgres_init:/docker-entrypoint-initdb.d
     networks:
       - bi_network
 

@@ -3,6 +3,7 @@ import numpy as np
 from sqlalchemy import create_engine
 from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
+from sqlalchemy.exc import OperationalError
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
 from sklearn.cluster import KMeans
@@ -10,6 +11,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.svm import SVC
 from sklearn.metrics import classification_report, adjusted_rand_score, silhouette_score
+from sklearn.impute import KNNImputer, SimpleImputer
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.decomposition import PCA
@@ -27,9 +29,9 @@ DB_URI = f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
 
 # --- Configuration Constants ---
 TABLE_NAME = "fact_inmigrante"  # Replace with your table name
-TASK = "clustering"             # "clustering" or "classification"
-TARGET_COLUMN = None            # Required for classification, e.g., 'some_column'
-LIMIT = None                    # Set to an integer to limit rows, or None
+TASK = "classification"             # "clustering" or "classification"
+TARGET_COLUMN = "ocu_migr"            # Required for classification, e.g., 'some_column'
+LIMIT = None                  # Set to an integer to limit rows, or None
 # -----------------------------------
 
 def get_data(db_uri, table_name, limit=None):
@@ -90,6 +92,12 @@ def get_data(db_uri, table_name, limit=None):
             print("Data loaded successfully.")
             print(f"DataFrame contains {len(df.columns)} columns.")
             return df
+    except OperationalError as e:
+        print(f"\n[!] Connection Failed: {e}")
+        if "password authentication failed" in str(e):
+            print("[!] Hint: You are loading a dump file. Did the dump file overwrite the password?")
+            print("[!] Try using the password from the original database, or remove 'CREATE/ALTER ROLE' from the .sql file.")
+        return None
     except Exception as e:
         print(f"An error occurred while connecting to the database or reading data: {e}")
         return None
@@ -112,10 +120,21 @@ def preprocess_data(df):
     print(f"Numeric features to be scaled: {list(numeric_features)}")
     print(f"Categorical features to be one-hot encoded: {list(categorical_features)}")
 
+    # Define transformers with imputation
+    numeric_transformer = Pipeline(steps=[
+        ('imputer', SimpleImputer(strategy='mean')),
+        ('scaler', StandardScaler())
+    ])
+
+    categorical_transformer = Pipeline(steps=[
+        ('imputer', SimpleImputer(strategy='most_frequent')),
+        ('onehot', OneHotEncoder(handle_unknown='ignore'))
+    ])
+
     preprocessor = ColumnTransformer(
         transformers=[
-            ('num', StandardScaler(), numeric_features),
-            ('cat', OneHotEncoder(handle_unknown='ignore'), categorical_features)
+            ('num', numeric_transformer, numeric_features),
+            ('cat', categorical_transformer, categorical_features)
         ], remainder='passthrough') # Keep other columns if any
 
     return preprocessor
