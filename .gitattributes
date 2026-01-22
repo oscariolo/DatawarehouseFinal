@@ -1,1 +1,4 @@
 postgres_init/backupDataWarehouse.sql filter=lfs diff=lfs merge=lfs -text
+data_cache/fact_emigrante_fact_inmigrante.parquet filter=lfs diff=lfs merge=lfs -text
+data_cache/sample_fact.parquet filter=lfs diff=lfs merge=lfs -text
+data_cache/train_tensor.pt filter=lfs diff=lfs merge=lfs -text

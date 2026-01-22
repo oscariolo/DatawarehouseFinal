@@ -1,0 +1,31 @@
+id_persona,id_transporte,id_frontera,id_ocupacion,id_fecha,dim_persona_sex_migr,dim_persona_nac_migr,dim_transporte_via_tran,dim_frontera_jef_migr,dim_frontera_pro_jefm,dim_frontera_can_jefm,dim_ocupacion_ocu_migr,dim_fecha_fecha_completa,dim_fecha_anio_movi,dim_fecha_mes_movi,dim_fecha_dia_movi,source_fact,cluster
+5,5,24,63,1515,Mujer,Colombia,Vía Maritimo,Unidad de Control Migratorio Puerto Marítimo Bolívar,El Oro,Machala,Otros miembros de las fuerzas armadas,2018/6/27,2018,6,27,fact_inmigrante,0
+31,1,4,4,1691,Mujer,Venezuela,Vía terrestre,Centro Nacional de Atención Fronteriza Rumichaca,Carchi,Tulcán,Menores de edad,2018/9/19,2018,9,19,fact_inmigrante,0
+14,1,1,3,93,Hombre,Colombia,Vía terrestre,Centro Binacional de Atención Fronteriza Huaquillas,El Oro,Huaquillas,Sin especificar,2024/5/29,2024,5,29,fact_emigrante,0
+14,1,1,9,1627,Hombre,Colombia,Vía terrestre,Centro Binacional de Atención Fronteriza Huaquillas,El Oro,Huaquillas,"Oficiales, operarios y artesanos de artes mecanicas y de otros oficios no clasificados bajo otros epigrafes",2018/8/16,2018,8,16,fact_emigrante,0
+3,1,1,63,6,Hombre,Ecuador,Vía terrestre,Centro Binacional de Atención Fronteriza Huaquillas,El Oro,Huaquillas,Otros miembros de las fuerzas armadas,2024/5/2,2024,5,2,fact_inmigrante,0
+14,1,10,2,628,Hombre,Colombia,Vía terrestre,Centro Binacional de Atención Fronteriza San Miguel,Sucumbios,Sucumbíos,Personal de apoyo administrativo no clasificado bajo otros epigrafes,2023/8/15,2023,8,15,fact_inmigrante,0
+3,1,6,40,1703,Hombre,Ecuador,Vía terrestre,Unidad de Control Migratorio Frontera Terrestre Lalamor,Loja,Zapotillo,Agricultores y trabajadores calificados de jardines y de cultivos para el mercado,2019/10/5,2019,10,5,fact_emigrante,0
+6,1,4,42,63,Hombre,Estados Unidos de América,Vía terrestre,Centro Nacional de Atención Fronteriza Rumichaca,Carchi,Tulcán,"Conductores de automoviles, taxis y camionetas",2024/2/20,2024,2,20,fact_inmigrante,0
+5,1,1,7,1077,Mujer,Colombia,Vía terrestre,Centro Binacional de Atención Fronteriza Huaquillas,El Oro,Huaquillas,Amas de casa,2018/2/15,2018,2,15,fact_emigrante,0
+31,1,1,3,1555,Mujer,Venezuela,Vía terrestre,Centro Binacional de Atención Fronteriza Huaquillas,El Oro,Huaquillas,Sin especificar,2018/7/6,2018,7,6,fact_emigrante,0
+1,2,3,2,435,Mujer,Ecuador,Vía Aérea,Aeropuerto Internacional Mariscal Sucre,Pichincha,Quito,Personal de apoyo administrativo no clasificado bajo otros epigrafes,2023/11/2,2023,11,2,fact_inmigrante,1
+3,2,3,2,254,Hombre,Ecuador,Vía Aérea,Aeropuerto Internacional Mariscal Sucre,Pichincha,Quito,Personal de apoyo administrativo no clasificado bajo otros epigrafes,2024/3/8,2024,3,8,fact_emigrante,1
+3,2,3,58,152,Hombre,Ecuador,Vía Aérea,Aeropuerto Internacional Mariscal Sucre,Pichincha,Quito,Agronomos y afines,2024/8/31,2024,8,31,fact_inmigrante,1
+36,2,3,95,72,Mujer,Perú,Vía Aérea,Aeropuerto Internacional Mariscal Sucre,Pichincha,Quito,Auxiliares de servicios de abordo,2024/4/22,2024,4,22,fact_inmigrante,1
+47,2,3,2,900,Mujer,Irlanda,Vía Aérea,Aeropuerto Internacional Mariscal Sucre,Pichincha,Quito,Personal de apoyo administrativo no clasificado bajo otros epigrafes,2019/1/19,2019,1,19,fact_inmigrante,1
+1,2,3,7,444,Mujer,Ecuador,Vía Aérea,Aeropuerto Internacional Mariscal Sucre,Pichincha,Quito,Amas de casa,2023/11/8,2023,11,8,fact_emigrante,1
+12,2,3,19,281,Mujer,Francia,Vía Aérea,Aeropuerto Internacional Mariscal Sucre,Pichincha,Quito,Estudiantes,2024/2/7,2024,2,7,fact_emigrante,1
+1,2,3,25,1193,Mujer,Ecuador,Vía Aérea,Aeropuerto Internacional Mariscal Sucre,Pichincha,Quito,Medicos generales,2021/8/10,2021,8,10,fact_inmigrante,1
+1,2,3,17,437,Mujer,Ecuador,Vía Aérea,Aeropuerto Internacional Mariscal Sucre,Pichincha,Quito,Profesionales de la ensenanza no clasificados bajo otros epigrafes,2023/8/23,2023,8,23,fact_emigrante,1
+1,6,3,24,836,Mujer,Ecuador,Via Aerea,Aeropuerto Internacional Mariscal Sucre,Pichincha,Quito,Jubilados y pensionistas,2020/1/10,2020,1,10,fact_inmigrante,1
+3,2,2,14,1222,Hombre,Ecuador,Vía Aérea,Aeropuerto Internacional José Joaquín de Olmedo,Guayas,Guayaquil,Comerciantes de tiendas,2019/4/6,2019,4,6,fact_inmigrante,2
+23,2,2,2,539,Mujer,España,Vía Aérea,Aeropuerto Internacional José Joaquín de Olmedo,Guayas,Guayaquil,Personal de apoyo administrativo no clasificado bajo otros epigrafes,2023/12/1,2023,12,1,fact_inmigrante,2
+3,2,2,2,1143,Hombre,Ecuador,Vía Aérea,Aeropuerto Internacional José Joaquín de Olmedo,Guayas,Guayaquil,Personal de apoyo administrativo no clasificado bajo otros epigrafes,2018/3/3,2018,3,3,fact_inmigrante,2
+3,2,2,2,167,Hombre,Ecuador,Vía Aérea,Aeropuerto Internacional José Joaquín de Olmedo,Guayas,Guayaquil,Personal de apoyo administrativo no clasificado bajo otros epigrafes,2024/5/4,2024,5,4,fact_emigrante,2
+1,2,2,4,1041,Mujer,Ecuador,Vía Aérea,Aeropuerto Internacional José Joaquín de Olmedo,Guayas,Guayaquil,Menores de edad,2021/5/13,2021,5,13,fact_inmigrante,2
+1,2,2,95,324,Mujer,Ecuador,Vía Aérea,Aeropuerto Internacional José Joaquín de Olmedo,Guayas,Guayaquil,Auxiliares de servicios de abordo,2024/5/28,2024,5,28,fact_emigrante,2
+4,2,2,7,295,Mujer,Estados Unidos de América,Vía Aérea,Aeropuerto Internacional José Joaquín de Olmedo,Guayas,Guayaquil,Amas de casa,2024/8/4,2024,8,4,fact_inmigrante,2
+14,2,2,2,1834,Hombre,Colombia,Vía Aérea,Aeropuerto Internacional José Joaquín de Olmedo,Guayas,Guayaquil,Personal de apoyo administrativo no clasificado bajo otros epigrafes,2018/11/9,2018,11,9,fact_inmigrante,2
+3,2,2,2,717,Hombre,Ecuador,Vía Aérea,Aeropuerto Internacional José Joaquín de Olmedo,Guayas,Guayaquil,Personal de apoyo administrativo no clasificado bajo otros epigrafes,2023/9/22,2023,9,22,fact_inmigrante,2
+15,2,2,4,519,Hombre,Perú,Vía Aérea,Aeropuerto Internacional José Joaquín de Olmedo,Guayas,Guayaquil,Menores de edad,2023/12/13,2023,12,13,fact_inmigrante,2
