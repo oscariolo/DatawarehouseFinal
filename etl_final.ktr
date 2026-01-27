@@ -462,10 +462,6 @@
         <attribute>N</attribute>
       </attribute>
       <attribute>
-        <code>MSSQL_DOUBLE_DECIMAL_SEPARATOR</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
         <code>PORT_NUMBER</code>
         <attribute>5432</attribute>
       </attribute>
@@ -543,11 +539,6 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>CSV file input 2020</from>
-      <to>Filter rows 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Null if</from>
       <to>Select values</to>
       <enabled>Y</enabled>
@@ -588,17 +579,17 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Filter rows 2</from>
-      <to>Select values 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>CSV file input 2023</from>
       <to>Select values 2</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>CSV file input 2024</from>
+      <to>Select values 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>CSV file input 2020</from>
       <to>Select values 2</to>
       <enabled>Y</enabled>
     </hop>
@@ -614,7 +605,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <filename>/home/oscariolodebian/Documents/AlmacenYMineriaDatos/trabajoFinal/Datos/esi_2018.csv</filename>
+    <filename>${Internal.Entry.Current.Directory}/Datos/esi_2018_PROCESSED.csv</filename>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
@@ -893,6 +884,17 @@
         <precision>0</precision>
         <trim_type>none</trim_type>
       </field>
+      <field>
+        <name>ocu_class</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>16</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
     </fields>
     <attributes/>
     <cluster_schema/>
@@ -903,8 +905,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>32</xloc>
-      <yloc>416</yloc>
+      <xloc>224</xloc>
+      <yloc>496</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -919,7 +921,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <filename>/home/oscariolodebian/Documents/AlmacenYMineriaDatos/trabajoFinal/Datos/ESI_2019.csv</filename>
+    <filename>${Internal.Entry.Current.Directory}/Datos/ESI_2019_PROCESSED.csv</filename>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
@@ -1198,6 +1200,17 @@
         <precision>0</precision>
         <trim_type>none</trim_type>
       </field>
+      <field>
+        <name>ocu_class</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>15</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
     </fields>
     <attributes/>
     <cluster_schema/>
@@ -1208,8 +1221,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>32</xloc>
-      <yloc>336</yloc>
+      <xloc>224</xloc>
+      <yloc>416</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1224,7 +1237,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <filename>/home/oscariolodebian/Documents/AlmacenYMineriaDatos/trabajoFinal/Datos/ESI_2020.csv</filename>
+    <filename>${Internal.Entry.Current.Directory}/Datos/ESI_2020_PROCESSED.csv</filename>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
@@ -1237,7 +1250,7 @@
     <parallel>N</parallel>
     <newline_possible>N</newline_possible>
     <format>mixed</format>
-    <encoding/>
+    <encoding>ISO-8859-1</encoding>
     <fields>
       <field>
         <name>tip_movi</name>
@@ -1503,6 +1516,17 @@
         <precision>0</precision>
         <trim_type>none</trim_type>
       </field>
+      <field>
+        <name>ocu_class</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>16</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
     </fields>
     <attributes/>
     <cluster_schema/>
@@ -1513,8 +1537,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>32</xloc>
-      <yloc>256</yloc>
+      <xloc>224</xloc>
+      <yloc>336</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1529,11 +1553,11 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <filename>/home/oscariolodebian/Documents/AlmacenYMineriaDatos/trabajoFinal/Datos/esi_2021.csv</filename>
+    <filename>${Internal.Entry.Current.Directory}/Datos/esi_2021_PROCESSED.csv</filename>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
-    <separator>;</separator>
+    <separator>,</separator>
     <enclosure>"</enclosure>
     <header>Y</header>
     <buffer_size>50000</buffer_size>
@@ -1799,13 +1823,24 @@
       </field>
       <field>
         <name>edad</name>
-        <type>String</type>
+        <type>Integer</type>
         <format>#</format>
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
         <length>15</length>
         <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>ocu_class</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>16</length>
+        <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
     </fields>
@@ -1818,8 +1853,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>32</xloc>
-      <yloc>192</yloc>
+      <xloc>224</xloc>
+      <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1834,7 +1869,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <filename>/home/oscariolodebian/Documents/AlmacenYMineriaDatos/trabajoFinal/Datos/esi2023.csv</filename>
+    <filename>${Internal.Entry.Current.Directory}/Datos/esi2023_PROCESSED.csv</filename>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
@@ -2113,6 +2148,17 @@
         <precision>0</precision>
         <trim_type>none</trim_type>
       </field>
+      <field>
+        <name>ocu_class</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>16</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
     </fields>
     <attributes/>
     <cluster_schema/>
@@ -2123,8 +2169,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>32</xloc>
-      <yloc>112</yloc>
+      <xloc>224</xloc>
+      <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2139,7 +2185,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <filename>/home/oscariolodebian/Documents/AlmacenYMineriaDatos/trabajoFinal/Datos/esi_2024.csv</filename>
+    <filename>${Internal.Entry.Current.Directory}/Datos/esi_2024_PROCESSED.csv</filename>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
@@ -2409,13 +2455,24 @@
       </field>
       <field>
         <name>edad</name>
-        <type>String</type>
+        <type>Integer</type>
         <format>#</format>
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
         <length>15</length>
         <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>ocu_class</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>16</length>
+        <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
     </fields>
@@ -2428,8 +2485,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>32</xloc>
-      <yloc>32</yloc>
+      <xloc>224</xloc>
+      <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2526,8 +2583,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>800</xloc>
-      <yloc>304</yloc>
+      <xloc>752</xloc>
+      <yloc>384</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2551,8 +2608,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1664</xloc>
-      <yloc>192</yloc>
+      <xloc>1424</xloc>
+      <yloc>448</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2595,43 +2652,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1472</xloc>
-      <yloc>304</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Filter rows 2</name>
-    <type>FilterRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <send_true_to>Select values 2</send_true_to>
-    <send_false_to/>
-    <compare>
-      <condition>
-        <negated>N</negated>
-        <leftvalue>tip_naci</leftvalue>
-        <function>IS NOT NULL</function>
-        <rightvalue/>
-      </condition>
-    </compare>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>192</xloc>
-      <yloc>256</yloc>
+      <xloc>1232</xloc>
+      <yloc>560</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2661,8 +2683,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>400</xloc>
-      <yloc>176</yloc>
+      <xloc>368</xloc>
+      <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2706,8 +2728,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>528</xloc>
-      <yloc>176</yloc>
+      <xloc>496</xloc>
+      <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2751,8 +2773,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>400</xloc>
-      <yloc>256</yloc>
+      <xloc>368</xloc>
+      <yloc>272</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2829,8 +2851,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>640</xloc>
-      <yloc>304</yloc>
+      <xloc>576</xloc>
+      <yloc>384</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2888,8 +2910,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1280</xloc>
-      <yloc>304</yloc>
+      <xloc>992</xloc>
+      <yloc>560</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2943,8 +2965,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1088</xloc>
-      <yloc>112</yloc>
+      <xloc>992</xloc>
+      <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2973,6 +2995,10 @@
         <name>ocu_migr</name>
         <lookup>ocu_migr</lookup>
       </key>
+      <key>
+        <name>ocu_class</name>
+        <lookup>ocu_class</lookup>
+      </key>
       <return>
         <name>id_ocupacion</name>
         <creation_method>tablemax</creation_method>
@@ -2990,8 +3016,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1088</xloc>
-      <yloc>304</yloc>
+      <xloc>992</xloc>
+      <yloc>384</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -3041,8 +3067,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>800</xloc>
-      <yloc>112</yloc>
+      <xloc>752</xloc>
+      <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -3088,8 +3114,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>944</xloc>
-      <yloc>112</yloc>
+      <xloc>880</xloc>
+      <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -3156,8 +3182,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1856</xloc>
-      <yloc>432</yloc>
+      <xloc>1616</xloc>
+      <yloc>688</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -3224,8 +3250,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1856</xloc>
-      <yloc>176</yloc>
+      <xloc>1616</xloc>
+      <yloc>432</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -3514,6 +3540,19 @@
         <digits>none</digits>
         <remove_special_characters>none</remove_special_characters>
       </field>
+      <field>
+        <in_stream_name>ocu_class</in_stream_name>
+        <out_stream_name/>
+        <trim_type/>
+        <lower_upper/>
+        <padding_type/>
+        <pad_char/>
+        <pad_len/>
+        <init_cap/>
+        <mask_xml/>
+        <digits/>
+        <remove_special_characters/>
+      </field>
     </fields>
     <attributes/>
     <cluster_schema/>
@@ -3524,8 +3563,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>640</xloc>
-      <yloc>112</yloc>
+      <xloc>576</xloc>
+      <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -3549,8 +3588,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1664</xloc>
-      <yloc>416</yloc>
+      <xloc>1424</xloc>
+      <yloc>672</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

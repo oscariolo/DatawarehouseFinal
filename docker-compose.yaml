@@ -48,14 +48,6 @@ services:
     networks:
       - bi_network
     
-  pytorchROC:
-    image: rocm/pytorch
-    devices:
-      - /dev/kfd
-      - /dev/dri
-    security_opt:
-      - seccomp=unconfined
-
 volumes:
   postgres_data:
   pentaho_data:
