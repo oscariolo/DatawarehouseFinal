@@ -8,22 +8,42 @@ import io
 
 BASE_DIR = Path(__file__).resolve().parent
 
-def remove_accents(text):
-    """Remove accent characters from text."""
-    if isinstance(text, str):
-        # Normalize to NFD (decomposed form) and filter out combining marks
-        nfd = unicodedata.normalize('NFD', text)
-        return ''.join(char for char in nfd if unicodedata.category(char) != 'Mn')
+def normalize_text(text):
+    """Remove accents, convert to lowercase, and normalize whitespace for ML consistency."""
+    if not isinstance(text, str):
+        return text
+    # Convert to lowercase for ML consistency
+    text = text.lower()
+    # Remove accents
+    nfd = unicodedata.normalize('NFD', text)
+    text = ''.join(char for char in nfd if unicodedata.category(char) != 'Mn')
+    # Normalize spaces: collapse multiple spaces into one
+    text = ' '.join(text.split())
     return text
+
+def normalize_mapping(category_mapping: Dict[str, List[str]]) -> Dict[str, List[str]]:
+    """
+    Normalize all values in the category mapping by removing accents and normalizing spaces.
+    
+    Args:
+        category_mapping: Dictionary with categories as keys and lists of occupation values
+    
+    Returns:
+        Dictionary with normalized values
+    """
+    return {
+        category: [normalize_text(value) for value in values]
+        for category, values in category_mapping.items()
+    }
 
 def map_ocu_migr(value, category_mapping: Dict[str, List[str]], unmapped_values: Set[str]):
     """
     Map ocu_migr values to categories using category-to-values mapping.
-    Collects unmapped values instead of raising error immediately.
+    Assumes category_mapping values are already normalized.
     
     Args:
         value: The value to map
-        category_mapping: Dictionary with categories as keys and lists of values as values
+        category_mapping: Dictionary with categories as keys and lists of normalized values
         unmapped_values: Set to collect unmapped values
     
     Returns:
@@ -32,9 +52,9 @@ def map_ocu_migr(value, category_mapping: Dict[str, List[str]], unmapped_values:
     if pd.isna(value):
         return value
     
-    value_str = str(value).strip()
+    value_str = normalize_text(str(value))
     
-    # Search for the value in all categories
+    # Search for the value in all categories (values are already normalized)
     for category, values in category_mapping.items():
         if value_str in values:
             return category
@@ -86,8 +106,13 @@ def process_csv_file(input_file: str, output_file: str = None, chunk_size: int =
     final_encoding = 'utf-8'
     for encoding in encodings:
         try:
-            chunk_reader = pd.read_csv(esi_file, chunksize=chunk_size, encoding=encoding, 
-                                        on_bad_lines='skip', engine='python', sep=separator, dtype=str)
+            chunk_reader = pd.read_csv(
+                esi_file,
+                chunksize=chunk_size,
+                encoding=encoding,
+                sep=separator,
+                dtype=str 
+            )
             print(f"  Reading with encoding: {encoding}")
             final_encoding = encoding
             break
@@ -96,18 +121,17 @@ def process_csv_file(input_file: str, output_file: str = None, chunk_size: int =
             continue
     
     for chunk in chunk_reader:
+        # Standardize column names to lowercase and remove accents
+        chunk.columns = [normalize_text(col) for col in chunk.columns]
         
-        # Remove accents and clean whitespace from all string columns
+        # Remove accents, convert to lowercase, and normalize whitespace from all columns
         for col in chunk.columns:
-            if chunk[col].dtype == 'object':  # String columns
-                chunk[col] = chunk[col].apply(remove_accents)
-                chunk[col] = chunk[col].str.replace(r'\s+', ' ', regex=True).str.strip()
+            chunk[col] = chunk[col].apply(normalize_text)
         
         # Map ocu_migr column
-        if 'ocu_migr' in chunk.columns and category_mapping is not None:
-            chunk['ocu_class'] = chunk['ocu_migr'].apply(
-                lambda x: map_ocu_migr(x, category_mapping, unmapped_values)
-            )
+        chunk['ocu_class'] = chunk['ocu_migr'].apply(
+            lambda x: map_ocu_migr(x, category_mapping, unmapped_values)
+        )
         
         processed_chunks.append(chunk)
         total_rows += len(chunk)
@@ -275,6 +299,8 @@ if __name__ == "__main__":
             "Zapateros y afines",
         ]
     }
+    
+    category_mapping = normalize_mapping(category_mapping)
 
     
     # Define the files to process
@@ -299,8 +325,8 @@ if __name__ == "__main__":
         print("\nUnmapped values:")
         for value in unmapped_values:
             print(value)
-    
-    
-    
-    
+
+
+
+
 
