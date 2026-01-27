@@ -47,7 +47,8 @@ services:
       - grafana_data:/var/lib/grafana
     networks:
       - bi_network
-    
+  
+
 volumes:
   postgres_data:
   pentaho_data:
