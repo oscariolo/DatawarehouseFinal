@@ -548,11 +548,6 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Concat fields</from>
-      <to>dim_persona</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Select values</from>
       <to>limpiezaDatos</to>
       <enabled>Y</enabled>
@@ -590,6 +585,21 @@
     <hop>
       <from>CSV file input 2024</from>
       <to>Value mapper</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Concat fields</from>
+      <to>Select values 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Select values 2</from>
+      <to>dim_persona</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>fact_emigrante</from>
+      <to>Fuzzy match</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -905,7 +915,7 @@
     </remotesteps>
     <GUI>
       <xloc>96</xloc>
-      <yloc>576</yloc>
+      <yloc>560</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1191,7 +1201,7 @@
       <field>
         <name>edad</name>
         <type>String</type>
-        <format>#</format>
+        <format/>
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -1507,11 +1517,11 @@
       <field>
         <name>edad</name>
         <type>String</type>
-        <format>#</format>
+        <format/>
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>15</length>
+        <length>100</length>
         <precision>0</precision>
         <trim_type>none</trim_type>
       </field>
@@ -1822,12 +1832,12 @@
       </field>
       <field>
         <name>edad</name>
-        <type>Integer</type>
-        <format>#</format>
+        <type>String</type>
+        <format/>
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>15</length>
+        <length>100</length>
         <precision>0</precision>
         <trim_type>none</trim_type>
       </field>
@@ -2138,12 +2148,12 @@
       </field>
       <field>
         <name>edad</name>
-        <type>Integer</type>
-        <format>#</format>
+        <type>String</type>
+        <format/>
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>15</length>
+        <length>100</length>
         <precision>0</precision>
         <trim_type>none</trim_type>
       </field>
@@ -2454,12 +2464,12 @@
       </field>
       <field>
         <name>edad</name>
-        <type>Integer</type>
-        <format>#</format>
+        <type>String</type>
+        <format/>
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>15</length>
+        <length>100</length>
         <precision>0</precision>
         <trim_type>none</trim_type>
       </field>
@@ -2729,7 +2739,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>656</xloc>
+      <xloc>528</xloc>
       <yloc>384</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2844,7 +2854,7 @@
     </remotesteps>
     <GUI>
       <xloc>992</xloc>
-      <yloc>192</yloc>
+      <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2946,7 +2956,7 @@
     </remotesteps>
     <GUI>
       <xloc>752</xloc>
-      <yloc>192</yloc>
+      <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2992,8 +3002,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>880</xloc>
-      <yloc>192</yloc>
+      <xloc>864</xloc>
+      <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -3174,7 +3184,7 @@
       <field>
         <in_stream_name>mes_movi</in_stream_name>
         <out_stream_name/>
-        <trim_type>both</trim_type>
+        <trim_type>none</trim_type>
         <lower_upper>none</lower_upper>
         <padding_type>none</padding_type>
         <pad_char/>
@@ -3182,7 +3192,7 @@
         <init_cap>N</init_cap>
         <mask_xml>None</mask_xml>
         <digits>none</digits>
-        <remove_special_characters>space</remove_special_characters>
+        <remove_special_characters>none</remove_special_characters>
       </field>
       <field>
         <in_stream_name>sex_migr</in_stream_name>
@@ -3441,8 +3451,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>656</xloc>
-      <yloc>192</yloc>
+      <xloc>528</xloc>
+      <yloc>160</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -3511,8 +3521,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>528</xloc>
-      <yloc>192</yloc>
+      <xloc>400</xloc>
+      <yloc>160</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -3547,6 +3557,89 @@
     <GUI>
       <xloc>368</xloc>
       <yloc>288</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Select values 2</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <select_unspecified>N</select_unspecified>
+      <meta>
+        <name>mes_movi</name>
+        <rename>mes_movi</rename>
+        <type>BigNumber</type>
+        <length>-2</length>
+        <precision>0</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>752</xloc>
+      <yloc>272</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Fuzzy match</name>
+    <type>FuzzyMatch</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <from/>
+    <lookupfield/>
+    <mainstreamfield/>
+    <outputmatchfield>match</outputmatchfield>
+    <outputvaluefield>measure value</outputvaluefield>
+    <caseSensitive>N</caseSensitive>
+    <closervalue>Y</closervalue>
+    <minimalValue>0</minimalValue>
+    <maximalValue>1</maximalValue>
+    <separator>,</separator>
+    <algorithm>levenshtein</algorithm>
+    <lookup>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1816</xloc>
+      <yloc>688</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
