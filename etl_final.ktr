@@ -462,6 +462,10 @@
         <attribute>N</attribute>
       </attribute>
       <attribute>
+        <code>MSSQL_DOUBLE_DECIMAL_SEPARATOR</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
         <code>PORT_NUMBER</code>
         <attribute>5432</attribute>
       </attribute>
@@ -539,16 +543,6 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Null if</from>
-      <to>Select values</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Select values</from>
-      <to>limpiezaDatos</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>cadena a numero mes</from>
       <to>Concat fields</to>
       <enabled>Y</enabled>
@@ -559,38 +553,43 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>CSV file input 2021</from>
-      <to>Select values 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Select values 2</from>
-      <to>Null if</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>CSV file input 2019</from>
-      <to>Select values 2</to>
+      <from>Select values</from>
+      <to>limpiezaDatos</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>CSV file input 2018</from>
-      <to>Select values 2</to>
+      <to>Value mapper</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>CSV file input 2023</from>
-      <to>Select values 2</to>
+      <from>Value mapper</from>
+      <to>Select values</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>CSV file input 2024</from>
-      <to>Select values 2</to>
+      <from>CSV file input 2019</from>
+      <to>Value mapper</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>CSV file input 2020</from>
-      <to>Select values 2</to>
+      <to>Value mapper</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>CSV file input 2021</from>
+      <to>Value mapper</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>CSV file input 2023</from>
+      <to>Value mapper</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>CSV file input 2024</from>
+      <to>Value mapper</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -618,7 +617,7 @@
     <parallel>N</parallel>
     <newline_possible>N</newline_possible>
     <format>mixed</format>
-    <encoding/>
+    <encoding>UTF-8</encoding>
     <fields>
       <field>
         <name>tip_movi</name>
@@ -876,11 +875,11 @@
       <field>
         <name>edad</name>
         <type>String</type>
-        <format>#</format>
+        <format/>
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>15</length>
+        <length>100</length>
         <precision>0</precision>
         <trim_type>none</trim_type>
       </field>
@@ -905,8 +904,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>224</xloc>
-      <yloc>496</yloc>
+      <xloc>96</xloc>
+      <yloc>576</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1221,8 +1220,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>224</xloc>
-      <yloc>416</yloc>
+      <xloc>80</xloc>
+      <yloc>464</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1537,8 +1536,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>224</xloc>
-      <yloc>336</yloc>
+      <xloc>112</xloc>
+      <yloc>384</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1853,8 +1852,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>224</xloc>
-      <yloc>256</yloc>
+      <xloc>80</xloc>
+      <yloc>304</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2139,7 +2138,7 @@
       </field>
       <field>
         <name>edad</name>
-        <type>String</type>
+        <type>Integer</type>
         <format>#</format>
         <currency>$</currency>
         <decimal>.</decimal>
@@ -2169,8 +2168,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>224</xloc>
-      <yloc>192</yloc>
+      <xloc>80</xloc>
+      <yloc>224</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2485,8 +2484,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>224</xloc>
-      <yloc>112</yloc>
+      <xloc>80</xloc>
+      <yloc>96</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2658,127 +2657,6 @@
     </GUI>
   </step>
   <step>
-    <name>Null if</name>
-    <type>NullIf</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <name>edad</name>
-        <value>Sin especificar</value>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>368</xloc>
-      <yloc>192</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Select values</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <select_unspecified>N</select_unspecified>
-      <meta>
-        <name>edad</name>
-        <rename>edad</rename>
-        <type>Integer</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask>#</conversion_mask>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>496</xloc>
-      <yloc>192</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Select values 2</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <select_unspecified>N</select_unspecified>
-      <meta>
-        <name>edad</name>
-        <rename>edad</rename>
-        <type>None</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask/>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type>normal</storage_type>
-      </meta>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>368</xloc>
-      <yloc>272</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
     <name>cadena a numero mes</name>
     <type>ValueMapper</type>
     <description/>
@@ -2794,51 +2672,51 @@
     <non_match_default/>
     <fields>
       <field>
-        <source_value>Enero</source_value>
+        <source_value>enero</source_value>
         <target_value>1</target_value>
       </field>
       <field>
-        <source_value>Febrero</source_value>
+        <source_value>febrero</source_value>
         <target_value>2</target_value>
       </field>
       <field>
-        <source_value>Marzo</source_value>
+        <source_value>marzo</source_value>
         <target_value>3</target_value>
       </field>
       <field>
-        <source_value>Abril</source_value>
+        <source_value>abril</source_value>
         <target_value>4</target_value>
       </field>
       <field>
-        <source_value>Mayo</source_value>
+        <source_value>mayo</source_value>
         <target_value>5</target_value>
       </field>
       <field>
-        <source_value>Junio</source_value>
+        <source_value>junio</source_value>
         <target_value>6</target_value>
       </field>
       <field>
-        <source_value>Julio</source_value>
+        <source_value>julio</source_value>
         <target_value>7</target_value>
       </field>
       <field>
-        <source_value>Agosto</source_value>
+        <source_value>agosto</source_value>
         <target_value>8</target_value>
       </field>
       <field>
-        <source_value>Septiembre</source_value>
+        <source_value>septiembre</source_value>
         <target_value>9</target_value>
       </field>
       <field>
-        <source_value>Octubre</source_value>
+        <source_value>octubre</source_value>
         <target_value>10</target_value>
       </field>
       <field>
-        <source_value>Noviembre</source_value>
+        <source_value>noviembre</source_value>
         <target_value>11</target_value>
       </field>
       <field>
-        <source_value>Diciembre</source_value>
+        <source_value>diciembre</source_value>
         <target_value>12</target_value>
       </field>
     </fields>
@@ -2851,7 +2729,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>576</xloc>
+      <xloc>656</xloc>
       <yloc>384</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2992,12 +2870,12 @@
     <crcfield>hashcode</crcfield>
     <fields>
       <key>
-        <name>ocu_migr</name>
-        <lookup>ocu_migr</lookup>
-      </key>
-      <key>
         <name>ocu_class</name>
         <lookup>ocu_class</lookup>
+      </key>
+      <key>
+        <name>ocu_migr</name>
+        <lookup>ocu_migr</lookup>
       </key>
       <return>
         <name>id_ocupacion</name>
@@ -3543,7 +3421,7 @@
       <field>
         <in_stream_name>ocu_class</in_stream_name>
         <out_stream_name/>
-        <trim_type/>
+        <trim_type>none</trim_type>
         <lower_upper/>
         <padding_type/>
         <pad_char/>
@@ -3563,7 +3441,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>576</xloc>
+      <xloc>656</xloc>
       <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
@@ -3590,6 +3468,85 @@
     <GUI>
       <xloc>1424</xloc>
       <yloc>672</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Select values</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <select_unspecified>N</select_unspecified>
+      <meta>
+        <name>edad</name>
+        <rename>edad</rename>
+        <type>Integer</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>528</xloc>
+      <yloc>192</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Value mapper</name>
+    <type>ValueMapper</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <field_to_use>edad</field_to_use>
+    <target_field/>
+    <non_match_default/>
+    <fields>
+      <field>
+        <source_value>sin especificar</source_value>
+        <target_value/>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>368</xloc>
+      <yloc>288</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
